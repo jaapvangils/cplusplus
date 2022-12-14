@@ -1,8 +1,6 @@
 #include <string>
 #include "bank.h"
 
-using namespace std;
-
 Bankrekening::Bankrekening(string Naam, double Saldo) {
 	this->Naam = Naam;
 	this->Saldo = Saldo;

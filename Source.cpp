@@ -1,8 +1,5 @@
 #include <iostream>
-#include <string>
 #include "bank.h"
-
-using namespace std;
 
 int main() {
 	Bankrekening BR1;
