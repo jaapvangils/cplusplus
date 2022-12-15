@@ -21,5 +21,7 @@ public:
 	Lid& geefLid(std::string naam);
 	void geefInfoBoeken();
 	void geefInfoLeden();
+	void haalBoekenOp(std::string fileName);
+	void haalLedenOp(std::string fileName);
 };
 

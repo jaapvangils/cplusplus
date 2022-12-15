@@ -1,5 +1,9 @@
 #include "bibliotheek.h"
 #include <iostream>
+#include <fstream>
+#include <sstream>
+#include <Windows.h>
+
 
 
 void Bibliotheek::voegLidToe(std::string naam) {
@@ -51,11 +55,43 @@ void Bibliotheek::brengBoekTerug(Boek& boek) {
 
 void Bibliotheek::geefInfoBoeken() {
 	for (auto& b : boeken) {
-		std::cout << b.geefTitel() << "," << b.getStatus() << std::endl;
+		std::cout << b.geefTitel() << "," << b.geefAuteur() << "," << b.getStatus() << std::endl;
 	}
 }
 void Bibliotheek::geefInfoLeden() {
 	for (auto& l : leden) {
 		std::cout << l.geefNaam() << "," << l.geefNr() << std::endl;
 	}
+}
+void Bibliotheek::haalBoekenOp(std::string fileName) {
+	std::string line, word;
+	std::vector<std::string> tempBoek;
+	std::ifstream infile;
+	infile.open(fileName);
+	while (std::getline(infile, line)) {
+		std::istringstream inLine(line);
+		while (std::getline(inLine, word, ',')) {
+			//			std::cout << word << std::endl;
+			tempBoek.push_back(word);
+		}
+		if (tempBoek.size() == 2) {
+			Boek b = Boek(tempBoek[1], tempBoek[0], NietUitgeleend);
+			voegBoekToe(b);
+		}
+		tempBoek.clear();
+	}
+	infile.close();
+}
+
+void Bibliotheek::haalLedenOp(std::string fileName) {
+	std::string line;
+	std::ifstream infile;
+	infile.open(fileName);
+	std::cout << "Laden:";
+	while (std::getline(infile, line)) {
+		voegLidToe(line);
+		std::cout << "#";
+		Sleep(300);
+	}
+	infile.close();
 }
